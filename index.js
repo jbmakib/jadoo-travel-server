@@ -46,10 +46,35 @@ async function run() {
             res.json(service);
         });
 
-        // POST API for add orders
+        // POST API for add order
         app.post("/order", async (req, res) => {
             const order = req.body;
             const result = await ordersCollection.insertOne(order);
+            res.json(result);
+        });
+
+        // PUT API for update order
+        app.put("/order/:id", async (req, res) => {
+            const id = req.params.id;
+            const updatedOrder = req.body;
+            const filter = { _id: ObjectId(id) };
+            const updateDoc = {
+                $set: {
+                    status: updatedOrder.status,
+                },
+            };
+            const result = await ordersCollection.updateOne(filter, updateDoc);
+            const cursor = ordersCollection.find({});
+            const orders = await cursor.toArray();
+            res.json({ result, orders });
+        });
+
+        // DELETE API for delete order as a user
+        app.delete("/order/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await ordersCollection.deleteOne(query);
+
             res.json(result);
         });
 
