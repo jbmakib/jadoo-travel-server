@@ -10,13 +10,7 @@
 
 -   Used mongoDb as noSQL database for storing data
 -   Used node and express as server for send request from client side to database using server
--   You can add a new service
--   You can see only your order and can manage it
--   You can manage all of the order of the site as a admin. You can approve or decline any order
 -   Get all orders API
--   Delete API
--   Update API
--   Post API
 -   Complete CRUD operation
 
 ## How to run?
